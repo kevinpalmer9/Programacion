@@ -20,14 +20,14 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        int km, precio, fechaMatriculacion, dia = 0, mes = 0, anio = 0;
+        int km, precio, fechaMatriculacion, dia = 0, mes = 0, anio = 0, menu=0;;
         String marca, matricula, descripcion, propietario, dniPropietario;
         String codigoinsercion;
         Scanner leer = new Scanner(System.in);
         Concesionario concesionarioCoches = new Concesionario();
         Validaciones validacion1 = new Validaciones();
 
-        for (int menu = -1; menu != 9;) {
+        while (menu != 9) {
             System.out.println("Las opciones son:");
             System.out.println("1. Nuevo vehiculo");
             System.out.println("2. Listar vehiculos");
