@@ -23,7 +23,7 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        int km, precio, fechaMatriculacion, dia = 0, mes = 0, anio = 0;
+        int km, precio, dia = 0, mes = 0, anio = 0, menu=0;
         String marca, matricula, descripcion, propietario, dniPropietario;
         
         // Fecha de matriculacion no puede ser un int ->Date fechaMatriculacion
