@@ -1,6 +1,6 @@
 package com.mycompany.prog06_tarea;
 
-import java.util.Arrays;
+import java.util.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,13 +27,13 @@ public class Concesionario {
     //Metodo para introducir un nuevo vehiculo. Antes se comprueba que el vehiculo no exista antes de introducirlo
     // devuelve un string: CODIGO DE VERIFICACION DE INSERCION DE VEHICULO  // 0 CORRECTO // -1 NO USADO (NO TIENE SENTIDO) // -2 VEHICULO YA EN SISTEMA
     // Recibe informacion del vehiculo a introducir
-    String insertarVehiculo(String marca, String matricula, int km, int fechaMatriculacion,
+    String insertarVehiculo(String marca, String matricula, int km, Date fechaMatriculacion,
             String descripcion, int precio, String propietario, String dniPropietario) {
         String codigo = null;
 
         if (buscarVehiculo(matricula) == (null)) {
             vehiculo[posicion] = new Vehiculo();
-            vehiculo[posicion].set_nuevo(marca, matricula.toUpperCase(), km, fechaMatriculacion, descripcion, precio, propietario, dniPropietario.toUpperCase());
+            vehiculo[posicion].setNuevo(marca, matricula.toUpperCase(), km, fechaMatriculacion, descripcion, precio, propietario, dniPropietario.toUpperCase());
             posicion = posicion + 1;
             codigo = "0";
         } else {
@@ -48,12 +48,12 @@ public class Concesionario {
     //Recibe un valor de un contador para recorrer el array
     //Devuelve un string con la informacion a mostrar
     String listarVehiculos(int i) {
-        String matricula, marca, descripcion;
-        int precio, km;
+        //String matricula, marca, descripcion;
+        //int precio, km;
         //Desde esta clase no debe mostrar nada
-        return ("Marca: " + vehiculo[i].get_marca() + ", Matricula: " + vehiculo[i].get_matricula()
-                + ", Precio: " + vehiculo[i].get_precio() + ", kms : " + vehiculo[i].get_km() + ", Descripcion: "
-                + vehiculo[i].get_desc() + ".");
+        return ("Marca: " + vehiculo[i].getMarca() + ", Matricula: " + vehiculo[i].getMatricula()
+                + ", Precio: " + vehiculo[i].getPrecio() + ", kms : " + vehiculo[i].getKm() + ", Descripcion: "
+                + vehiculo[i].getDescripcion() + ".");
     }
 
     //Metodo que busca un vehiculo introducido en el sistema por medio de la matricula
@@ -63,28 +63,26 @@ public class Concesionario {
         String resultado = null;
         for (int i = 0; i < posicion; i++) {
             //System.out.println(matricula + " vs " + vehiculo[i].get_matricula());
-            if (matricula.equals(vehiculo[i].get_matricula())) {
+            if (matricula.equals(vehiculo[i].getMatricula())) {
                 //  resultado = ("Marca: " + marca + ", Matricula: " + matricula + ", Precio: " + precio + ", kms : " + km + ", Descripcion: " + descripcion + ".");
-                resultado = ("Marca: " + vehiculo[i].get_marca() + ", Matricula: " + vehiculo[i].get_matricula()
-                        + ", Precio: " + vehiculo[i].get_precio() + ", kms : " + vehiculo[i].get_km() + ", Descripcion: "
-                        + vehiculo[i].get_desc() + ".");
+                resultado = ("Marca: " + vehiculo[i].getMarca() + ", Matricula: " + vehiculo[i].getMatricula()
+                        + ", Precio: " + vehiculo[i].getPrecio() + ", kms : " + vehiculo[i].getKm() + ", Descripcion: "
+                        + vehiculo[i].getDescripcion() + ".");
             }
         }
         return resultado;
     }
 
-    //Metodo para modificar los kms de un vehiculo existente en el sistema
+    //Metodo para aumentar los kms de un vehiculo existente en el sistema.
     //Recibe la matricula y los nuevos kms a introducir
-    //Devuelve un valor boolean. Si encuentra el vehiculo (matricula) devuelve true, en caso contrario false.
-    boolean modificarKms(String matricula, int km
-    ) {
+    //Devuelve un valor boolean. Si encuentra el vehiculo (matricula) y los km a escribir son superiores a los actuales devuelve true, en caso contrario false.
+    boolean modificarKms(String matricula, int km) {
         boolean coincidencia = false;
         for (int i = 0; i < posicion; i++) {
-
-            if (matricula.equals(vehiculo[i].get_matricula())) {
+            if (matricula.equals(vehiculo[i].getMatricula()) & (vehiculo[i].getKm() < km)) {
                 coincidencia = true;
+                vehiculo[i].setKm(km);
                 //System.out.println(matricula + " vs " + vehiculo[i].get_matricula());
-                vehiculo[i].set_km(km);
             }
         }
         return coincidencia;

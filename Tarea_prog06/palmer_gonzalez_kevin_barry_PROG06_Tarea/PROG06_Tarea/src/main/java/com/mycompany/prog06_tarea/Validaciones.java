@@ -27,9 +27,10 @@ import java.util.regex.*;
  */
 public class Validaciones {
 
+    
     //Recibe un string
     //Devuelve un boolean. Si lo encuentra, devuelve true
-    boolean validacionDni(String dni) {
+    static boolean validacionDni(String dni) {
         //Se define el patron
         Pattern p = Pattern.compile("([XY]?)([0-9]{8})([A-Za-z])");
         //Se busca el patron
@@ -39,7 +40,7 @@ public class Validaciones {
 
     //Recibe un string
     //Devuelve un boolean. Si lo encuentra, devuelve true
-    boolean validacionMatricula(String matricula) {
+    static boolean validacionMatricula(String matricula) {
         Pattern p = Pattern.compile("([0-9]{4})([A-Za-z]{3})");
         Matcher m = p.matcher(matricula);
         return m.find();
@@ -48,7 +49,7 @@ public class Validaciones {
     //Recibe un string
     //Devuelve un boolean (validacion de longitud & validacion de espacios). 
     //Para devolver afirmativo debe tener menos de 40 caracteres y mas de dos espacio. Nombre y dos apellidos
-    boolean validacionNombre(String nombre) {
+    static boolean validacionNombre(String nombre) {
         boolean vallong = false, valesp = false;
         int cantidadespacios = 0;
         if (nombre.length() < 40) {

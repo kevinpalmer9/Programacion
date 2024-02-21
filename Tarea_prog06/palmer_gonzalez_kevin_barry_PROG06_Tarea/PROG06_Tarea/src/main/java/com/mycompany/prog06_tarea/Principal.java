@@ -4,7 +4,10 @@
  */
 package com.mycompany.prog06_tarea;
 
+import java.util.Date;
 import java.util.Scanner;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 /**
  *
@@ -13,19 +16,23 @@ import java.util.Scanner;
  * Clase que muestra la informacion del menu, recibe los datos por teclado e
  * inicializa las clases Solo tiene el metodo main.
  *
- * Se inicializan los valores de concesionario y validaciones
+ * Se inicializan los valores de concesionario
  *
  */
 public class Principal {
 
     public static void main(String[] args) {
 
-        int km, precio, fechaMatriculacion, dia = 0, mes = 0, anio = 0, menu=0;;
+        int km, precio, fechaMatriculacion, dia = 0, mes = 0, anio = 0;
         String marca, matricula, descripcion, propietario, dniPropietario;
-        String codigoinsercion;
+        
+        // Fecha de matriculacion no puede ser un int ->Date fechaMatriculacion
+        Date fechaMatriculacion = new Date(); 
+        //String codigoinsercion = "";
         Scanner leer = new Scanner(System.in);
         Concesionario concesionarioCoches = new Concesionario();
-        Validaciones validacion1 = new Validaciones();
+        // Validaciones validacion1 = new Validaciones(); Se han creado metodos estaticos, por tanto no es necesario inicializar
+        
 
         while (menu != 9) {
             System.out.println("Las opciones son:");
@@ -52,7 +59,7 @@ public class Principal {
                     //INTRODUCCION DE MATRICULA
                     System.out.println("Matricula:");
                     matricula = leer.nextLine();
-                    while ((validacion1.validacionMatricula(matricula) == false)) {
+                    while ((Validaciones.validacionMatricula(matricula) == false)) {
                         System.out.println("Introduzca la matricula correcta:");
                         System.out.println("\tEl formato es NNNNLLL");
                         matricula = leer.nextLine();
@@ -62,7 +69,7 @@ public class Principal {
                     km = leer.nextInt();
                     //INTRODUCCION DE AÑO DE MATRICULACION
                     System.out.println("Año de matriculacion:");
-                    fechaMatriculacion = leer.nextInt();
+                    // fechaMatriculacion = leer.nextLine();
                     leer.nextLine();
                     //INTRODUCCION DE DESCRIPCION
                     System.out.println("Descripcion:");
@@ -74,7 +81,7 @@ public class Principal {
                     //INTRODUCCION DE NOMBRE DE PROPIETARIO Y VALIDACION
                     System.out.println("Nombre del propietario:");
                     propietario = leer.nextLine();
-                    while (validacion1.validacionNombre(propietario) == false) {
+                    while (Validaciones.validacionNombre(propietario) == false) {
                         System.out.println("Debe introducir nombre y apellidos:");
                         propietario = leer.nextLine();
                     }
@@ -82,7 +89,7 @@ public class Principal {
                     //INTRODUCCION DE DNI Y VALIDACION
                     System.out.println("DNI del propietario:");
                     dniPropietario = leer.nextLine();
-                    while (validacion1.validacionDni(dniPropietario) == false) {
+                    while (Validaciones.validacionDni(dniPropietario) == false) {
                         System.out.println("Debe introducir el DNI adecuadamente:");
                         System.out.println("\tEl formato adecuado es NNNNNNNNL (LNNNNNNNL si es extranjero)");
                         dniPropietario = leer.nextLine();
@@ -93,7 +100,7 @@ public class Principal {
                     // 0 CORRECTO
                     // -1 NO USADO (NO TIENE SENTIDO)
                     // -2 VEHICULO YA EN SISTEMA
-                    codigoinsercion = concesionarioCoches.insertarVehiculo(marca, matricula, km, fechaMatriculacion, descripcion, precio, propietario, dniPropietario);
+                    String codigoinsercion = concesionarioCoches.insertarVehiculo(marca, matricula, km, fechaMatriculacion, descripcion, precio, propietario, dniPropietario);
                     //System.out.println("El codigo recibido es: " + codigoinsercion + "\n");
                     break;
 
@@ -119,7 +126,7 @@ public class Principal {
                     matricula = leer.nextLine().toUpperCase();
                     matricula = leer.nextLine().toUpperCase();
 
-                    while ((validacion1.validacionMatricula(matricula) == false)) {
+                    while ((Validaciones.validacionMatricula(matricula) == false)) {
                         System.out.println("Introduzca la matricula correcta:");
                         System.out.println("\tEl formato es NNNNLLL");
                         matricula = leer.nextLine();
@@ -144,7 +151,7 @@ public class Principal {
                     System.out.println("Introduce la matricula del vehiculo que desea modificar:");
                     matricula = leer.nextLine();
                     matricula = leer.nextLine();
-                    while ((validacion1.validacionMatricula(matricula) == false)) {
+                    while ((Validaciones.validacionMatricula(matricula) == false)) {
                         System.out.println("Introduzca la matricula correcta:");
                         System.out.println("\tEl formato es NNNNLLL");
                         matricula = leer.nextLine();
@@ -175,4 +182,7 @@ public class Principal {
         }
 
     }
+
+     
+
 }

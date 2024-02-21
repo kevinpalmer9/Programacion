@@ -4,7 +4,12 @@
  */
 package com.mycompany.prog06_tarea;
 
+import java.util.*;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.Temporal;
 
 /**
  *
@@ -22,14 +27,14 @@ public class Vehiculo {
     //Declaracion de atributos
     String marca;
     String matricula;
-    int km, fechaMatriculacion;
+    int km;
+    Date fechaMatriculacion;
     String descripcion;
     int precio;
     String propietario;
     String dniPropietario;
 
-    //Definicion de metodos
-    void set_nuevo(String marca, String matricula, int km, int fechaMatriculacion, String descripcion, int precio, String propietario, String dniPropietario) {
+    void setNuevo(String marca, String matricula, int km, java.util.Date fechaMatriculacion, String descripcion, int precio, String propietario, String dniPropietario) {
 
         this.marca = marca;
         this.matricula = matricula;
@@ -40,47 +45,66 @@ public class Vehiculo {
         this.propietario = propietario;
         this.dniPropietario = dniPropietario;
     }
-
-    //Devuelve string marca 
-    public String get_marca() {
+    
+    public String getMarca() {
         return marca;
     }
-
-    //Devuelve string matricula 
-    public String get_matricula() {
+    public String getMatricula() {
         return matricula;
     }
-
-    //Devuelve int km 
-    public int get_km() {
+    public int getKm() {
         return km;
     }
-
-    //Recibe un int km, estableciendoselo al atributo de la clase vehiculo.km
-    void set_km(int km) {
+    public Date getFechaMatriculacion(){
+        return fechaMatriculacion;
+    }
+    public String getDescripcion (){
+        return descripcion;
+    }
+     public int getPrecio() {
+        return precio;
+    }
+    public String getPropietario(){
+        return propietario;
+    }
+    public String getDniPropietario(){
+        return dniPropietario;
+    }    
+    private void setMarca (String Marca)
+    {
+        this.marca=marca;
+    }
+    private void setMatricula(String Matricula){
+        this.matricula = matricula;
+    }
+     void setKm(int km) {
         this.km = km;
     }
-
+    private void setFechaMatriculacion (Date fechaMatriculacion){
+        this.fechaMatriculacion = fechaMatriculacion;
+    }
+    private void setDescripcion (String descripcion){
+        this.descripcion = descripcion;
+    }
+    private void setPrecio (int precio){
+        this.precio = precio;
+    }
+    private void setPropietario (String propietario){
+        this.propietario = propietario;
+    }
+    private void setDniPropietario (String dniPropietario){
+        this.dniPropietario = dniPropietario;
+    }
+    
+   
     //Hace la resta de la fecha actual con la fecha de matriculacion, devuelve valor int antiguedad
-    public int get_anios() {
-        int antiguedad;
+    public Duration getAnios() {
         LocalDate ahora1 = LocalDate.now();
-        antiguedad = ahora1.getYear() - this.fechaMatriculacion;
+        Duration antiguedad = Duration.between(ahora1, (Temporal) getFechaMatriculacion());
         return antiguedad;
     }
 
-    //Devuelve el string con el dni del propietario
-    public String get_propietario() {
-        return dniPropietario;
-    }
 
-    //Devuelve in string con la descripcion
-    public String get_desc() {
-        return descripcion;
-    }
-
-    //Devuelve un int con el precio del vehiculo
-    public int get_precio() {
-        return precio;
-    }
+    
+    
 }
